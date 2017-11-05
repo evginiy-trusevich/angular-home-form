@@ -1,0 +1,85 @@
+<div class="form">
+
+  <ul class="tab-group">
+    <li class="tab" [class.active]="activeTab === 'sign'"><a (click)="toggleForm('sign')">Sign Up</a></li>
+    <li class="tab" [class.active]="activeTab === 'login'"><a (click)="toggleForm('login')">Log In</a></li>
+  </ul>
+
+  <div class="tab-content">
+    <div *ngIf="activeTab === 'sign'" id="signup">
+      <h1>Sign Up for Free</h1>
+
+     <form [formGroup]="formSign" (ngSubmit)="submitSign(formSign.value)">
+
+        <div class="top-row">
+          <div class="field-wrap">
+            <label>
+              First Name<span class="req">*</span>
+            </label>
+            <input type="text" formControlName="firstName">
+            <span class="formError" *ngIf="!formSign.get('firstName').valid && formSign.get('firstName').dirty">Введите имя</span>
+          </div>
+
+          <div class="field-wrap">
+            <label>
+              Last Name<span class="req">*</span>
+            </label>
+            <input type="text" formControlName="lastName">
+            <span class="formError" *ngIf="!formSign.get('lastName').valid && formSign.get('lastName').dirty">Введите фамилию</span>
+          </div>
+        </div>
+
+        <div class="field-wrap">
+          <label>
+            Email Address<span class="req">*</span>
+          </label>
+          <input type="email" formControlName="email">
+          <span class="formError" *ngIf="!formSign.get('email').valid && formSign.get('email').dirty">Некорректный email</span>
+        </div>
+
+        <div class="field-wrap">
+          <label>
+            Set A Password<span class="req">*</span>
+          </label>
+          <input type="password" formControlName="password">
+          <span class="formError" *ngIf="!formSign.get('password').valid && formSign.get('password').dirty">Минимальный пароль 3 символа</span>
+        </div>
+
+       <button [disabled]="!formSign.valid" type="submit" class="button button-block">Get Started</button>
+
+      </form>
+
+    </div>
+
+    <div *ngIf="activeTab === 'login'" id="login">
+      <h1>Welcome Back!</h1>
+
+      <form [formGroup]="formLogin" (ngSubmit)="submitLogin(formLogin.value)">
+
+        <div class="field-wrap">
+          <label>
+            Email Address<span class="req">*</span>
+          </label>
+          <input type="email" formControlName="email">
+          <span class="formError" *ngIf="!formLogin.get('email').valid && formLogin.get('email').dirty">Некорректный email</span>
+        </div>
+
+        <div class="field-wrap">
+          <label>
+            Password<span class="req">*</span>
+          </label>
+          <input type="password" formControlName="password">
+          <span class="formError" *ngIf="!formLogin.get('password').valid && formLogin.get('password').dirty">Минимальный пароль 3 символа</span>
+        </div>
+
+        <p class="forgot"><a href="#">Forgot Password?</a></p>
+
+        <button [disabled]="!formLogin.valid" type="submit" class="button button-block">Log In</button>
+
+      </form>
+
+    </div>
+
+  </div>
+
+</div>
